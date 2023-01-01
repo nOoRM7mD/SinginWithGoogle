@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SinginWithGoogle</string>
+
+    <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
+       from https://console.developers.google.com/ -->
+    <string name="server_client_id">941252800838-1lsfjuig2pmuuiqojn7gip9rrcud3b3q.apps.googleusercontent.com</string>
+    <string name="link_with_google">Link with google!</string>
+    <string name="signout">SignOut!</string>
+    <string name="disconnect">Disconnect</string>
+</resources>
