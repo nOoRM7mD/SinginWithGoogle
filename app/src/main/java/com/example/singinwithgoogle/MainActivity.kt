@@ -28,14 +28,25 @@ class MainActivity : AppCompatActivity() {
         binding.signInBtn.setOnClickListener {
             // For sample only: make sure there is a valid server client ID.
             validateServerClientID()
-            singinInWithGoogle()
+            if (!isUserSignedIn()) {
+                signinInWithGoogle()
+            } else {
+                Toast.makeText(this, "Signed in", Toast.LENGTH_SHORT).show()
+            }
         }
         binding.signOutBtn.setOnClickListener { signOut() }
         binding.disconnectButton.setOnClickListener { revokeAccess() }
 
     }
 
-    private fun singinInWithGoogle() {
+    private fun isUserSignedIn(): Boolean {
+
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        return account != null
+
+    }
+
+    private fun signinInWithGoogle() {
 
         // [START configure_signin]
         // Request only the user's ID token, which can be used to identify the
@@ -89,13 +100,13 @@ class MainActivity : AppCompatActivity() {
             val account = completedTask.getResult(ApiException::class.java)
             val idToken = account?.idToken
             Log.v(TAG, idToken.toString())
-            Toast.makeText(this,idToken,Toast.LENGTH_LONG).show()
+            Toast.makeText(this, idToken, Toast.LENGTH_LONG).show()
 
             // TODO: send ID Token to server and validate
             updateUI(account)
         } catch (e: ApiException) {
             Log.w(TAG, "handleSignInResult:error", e)
-            Toast.makeText(this,e.statusCode,Toast.LENGTH_LONG).show()
+            Toast.makeText(this, e.statusCode, Toast.LENGTH_LONG).show()
 
             updateUI(null)
         }
@@ -118,10 +129,10 @@ class MainActivity : AppCompatActivity() {
         if (account != null) {
             val idToken = account.idToken
             Log.v(TAG, idToken.toString())
-            Toast.makeText(this,idToken,Toast.LENGTH_LONG).show()
-        }else{
+            Toast.makeText(this, idToken, Toast.LENGTH_LONG).show()
+        } else {
             Log.v(TAG, "idToken null")
-            Toast.makeText(this,"idToken null",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "idToken null", Toast.LENGTH_LONG).show()
 
         }
     }
