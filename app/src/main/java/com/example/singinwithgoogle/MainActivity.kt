@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
             updateUI(account)
         } catch (e: ApiException) {
             Log.w(TAG, "handleSignInResult:error", e)
-            Toast.makeText(this, e.statusCode, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
 
             updateUI(null)
         }
